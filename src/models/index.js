@@ -1,0 +1,15 @@
+module.exports.User = require("./user.model");
+module.exports.Category = require("./Category.model");
+module.exports.Book = require("./Book.model.js");
+//module.exports.Token = require("./token.model");
+module.exports.Hotel = require("./hotel.model.js");
+module.exports.Bus = require("./bus.model.js");
+module.exports.Stationery = require("./stationery.model.js");
+module.exports.School = require("./school.model.js");
+module.exports.Travel = require("./travel.model.js");
+module.exports.Pharmacy = require("./pharmacy.model.js");
+module.exports.Jewellery = require("./jewellery.model.js");
+module.exports.Movie = require("./movie.model.js");
+module.exports.Music = require("./music.model.js");
+module.exports.Grocery = require("./grocery.model.js");
+module.exports.Mobile = require("./mobile.model.js");
