@@ -1,70 +1,41 @@
 const { Category } = require("../models");
 
-/**
- * Create category
- * @param {object} reqBody
- * @returns {Promise<Category>}
- */
+// category
 const createCategory = async (reqBody) => {
   return Category.create(reqBody);
 };
 
-/**
- * Get user list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Category>}
- */
-const getCategoryList = async (filter, options) => {
-  //const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
-
-  return Category.find({$or:[{is_active:true}]})
+// Get category list
+const getCategoryList = async (filter,options) => {
+    // const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+    return Category.find();
 };
 
-/**
- * Get user by email
- * @param {string} email
- * @returns {Promise<Category>}
- */
-const getCategoryByEmail = async (email) => {
-  return Category.findOne({ email });
+// Get Category by name
+const getCategoryByName = async (category_name) => {
+  return Category.findOne({ category_name });
 };
 
-/**
- * Get category details by id
- * @param {ObjectId} categoryId
- * @returns {Promise<Category>}
- */
+// Get Category details by id
 const getCategoryById = async (categoryId) => {
   return Category.findById(categoryId);
 };
 
-/**
- * user details update by id
- * @param {ObjectId} categoryId
- * @param {object} updateBody
- * @returns {Promise<Category>}
- */
-const updateDetails = async (categoryId, updateBody) => {
-  return Category.findByIdAndUpdate(categoryId, { $set: updateBody });
+// update Category
+const updateDetails = async (categoryId, reqBody) => {
+  return Category.findByIdAndUpdate(categoryId, { $set: reqBody });
 };
 
-/**
- * Delete user
- * @param {ObjectId} categoryId
- * @returns {Promise<Category>}
- */
+// Delete user
 const deleteCategory = async (categoryId) => {
   return Category.findByIdAndDelete(categoryId);
 };
 
-
-
 module.exports = {
-  createCategory,
-  getCategoryList,
-  getCategoryByEmail,
-  getCategoryById,
-  updateDetails,
-  deleteCategory,
-};
+    createCategory,
+    getCategoryList,
+    getCategoryByName,
+    getCategoryById,
+    updateDetails,
+    deleteCategory
+}

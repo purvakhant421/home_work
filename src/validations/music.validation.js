@@ -1,56 +1,16 @@
 const Joi = require("joi");
 
-/** create music */
+/** create Music */
 const createMusic = {
   body: Joi.object().keys({
-    music_name: Joi.string().required().trim(),
+    music_title: Joi.string().required().trim(),
     music_artist: Joi.string().required().trim(),
     music_album: Joi.string().required().trim(),
-  }),
-};
-
-/** GEt music list */
-const getMusicList = {
-  query: Joi.object().keys({
-    search: Joi.string().trim().allow(""),
-    sortBy: Joi.string().trim().allow(""),
-    limit: Joi.number().integer().allow(""),
-    page: Joi.number().integer().allow(""),
-  }),
-};
-
-/** music details update by id */
-const updateDetails = {
-  params: Joi.object().keys({
-    musicId: Joi.string().required().trim(),
-  }),
-  body: Joi.object().keys({
-    music_name: Joi.string().trim(),
-    music_director: Joi.string().trim(),
-  }),
-};
-
-/** Get music details by id */
-const getDetails = {
-  params: Joi.object().keys({
-    musicId: Joi.string().required().trim(),
-  }),
-};
-
-
-/** Send mail */
-const sendMail = {
-  body: Joi.object({
-    email: Joi.string().required().trim().email(),
-    subject: Joi.string().required().trim(),
-    text: Joi.string().required().trim(),
+    music_release_year: Joi.string().required().trim(),
+    music_duration_time: Joi.string().required().trim(),
   }),
 };
 
 module.exports = {
-  createMusic,
-  getMusicList,
-  getDetails,
-  updateDetails,
-  sendMail,
-};
+    createMusic
+}

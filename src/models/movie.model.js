@@ -1,34 +1,40 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const movieSchema = new mongoose.Schema(
     {
-        movie_name : {
+        movie_title : {
             type : String,
-            trim :true
+            trim : true,
         },
         movie_director : {
             type : String,
-            trim :true
+            trim : true,
         },
-        movie_rating : {
-            type : Number,
-            default : 0
-        },
-        movie_comment : {
+        movie_cast : {
             type : String,
-            trim :true
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        movie_release_date : {
+            type : String,
+            trim : true,
+        },
+        movie_duration_time : {
+            type : String,
+            trim : true,
+        },
+        music : {
+            type: mongoose.Types.ObjectId,
+            ref: "Music",
+        },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Movie = mongoose.model("movie", movieSchema);
+const Movie = mongoose.model("Movie" , movieSchema);
 module.exports = Movie;

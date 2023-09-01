@@ -1,34 +1,32 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const schoolSchema = new mongoose.Schema(
     {
         school_name : {
             type : String,
-            trim :true
+            trim : true,
         },
         school_address : {
             type : String,
-            trim :true
+            trim : true,
         },
-        school_student_name : {
+        school_time : {
             type : String,
-            trim :true
+            trim : true,
         },
-        school_course_name : {
-            type : String,
-            trim :true
+        standard : {
+            type : Number,
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const School = mongoose.model("school", schoolSchema);
+const School = mongoose.model("School" , schoolSchema);
 module.exports = School;

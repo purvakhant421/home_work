@@ -1,34 +1,36 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const travelSchema = new mongoose.Schema(
     {
-        travel_name : {
-            type : String,
-            trim :true
-        },
         travel_destination : {
             type : String,
-            trim :true
+            trim : true,
         },
-        travel_passenger_name : {
+        travel_Startdate : {
             type : String,
-            trim :true
+            trim : true,
         },
-        travel_passenger_age : {
-            type : Number,
-            default : 0
+        travel_Enddate : {
+            type : String,
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        travel_by : {
+            type : String,
+            trim : true,
+        },
+        bus : {
+            type: mongoose.Types.ObjectId,
+            ref: "Bus",
+        },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Travel = mongoose.model("travel", travelSchema);
+const Travel = mongoose.model("Travel" , travelSchema);
 module.exports = Travel;

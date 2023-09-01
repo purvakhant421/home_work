@@ -1,70 +1,36 @@
 const { Travel } = require("../models");
 
-/**
- * Create travel
- * @param {object} reqBody
- * @returns {Promise<Travel>}
- */
+// Create Travel
 const createTravel = async (reqBody) => {
   return Travel.create(reqBody);
 };
 
-/**
- * Get travel list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Travel>}
- */
+// Get Travel list
 const getTravelList = async (filter, options) => {
-  //const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
-
-  return Travel.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Travel.find();
+  // return Travel.find({$or:[{travel_by:"Airplane"},{travel_destination:"surat"}]});
 };
 
-/**
- * Get travel by email
- * @param {string} email
- * @returns {Promise<Travel>}
- */
-const getTravelByEmail = async (email) => {
-  return Travel.findOne({ email });
+// Get Travel details by id
+const getTravelById = async (TravelId) => {
+  return Travel.findById(TravelId);
 };
 
-/**
- * Get travel details by id
- * @param {ObjectId} travelId
- * @returns {Promise<Travel>}
- */
-const getTravelById = async (travelId) => {
-  return Travel.findById(travelId);
+// Delete Travel
+const deleteTravel = async (TravelId) => {
+  return Travel.findByIdAndDelete(TravelId);
 };
 
-/**
- * travel details update by id
- * @param {ObjectId} travelId
- * @param {object} updateBody
- * @returns {Promise<Travel>}
- */
-const updateDetails = async (travelId, updateBody) => {
-  return Travel.findByIdAndUpdate(travelId, { $set: updateBody });
+// Update Travel
+const updateTravel = async (TravelId,reqBody) => {
+  return Travel.findByIdAndUpdate(TravelId,{$set:reqBody});
 };
-
-/**
- * Delete travel
- * @param {ObjectId} travelId
- * @returns {Promise<Travel>}
- */
-const deleteTravel = async (travelId) => {
-  return Travel.findByIdAndDelete(travelId);
-};
-
-
 
 module.exports = {
-  createTravel,
-  getTravelList,
-  getTravelByEmail,
-  getTravelById,
-  updateDetails,
-  deleteTravel,
+    createTravel,
+    getTravelList,
+    getTravelById,
+    deleteTravel,
+    updateTravel
 };

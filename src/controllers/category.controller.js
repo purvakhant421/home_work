@@ -4,24 +4,17 @@ const { categoryService } = require("../services");
 const createCategory = async (req, res) => {
   try {
     const reqBody = req.body;
-
-    // const categoryExists = await categoryService.getCategoryByEmail(reqBody.email);
-    // if (categoryExists) {
-    //   throw new Error("category already created by this email!");
-    // }
-
     const category = await categoryService.createCategory(reqBody);
-    // if (!category) {
-    //   throw new Error("Something went wrong, please try again or later!");
-    // }
-
+    if (!category) {
+      throw new Error("Something went wrong, please try again or later!");
+    }
     res.status(200).json({
       success: true,
       message: "Category create successfully!",
-      data: { category },
+      data: { reqBody },
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({ success: false, message:  error.message});
   }
 };
 
@@ -33,11 +26,10 @@ const getCategoryList = async (req, res) => {
 
     if (search) {
       filter.$or = [
-        { first_name: { $regex: search, $options: "i" } },
-        { last_name: { $regex: search, $options: "i" } },
+        { Category_name: { $regex: search, $options: "i" } },
+        { Category_number : { $regex: search, $options: "i" } },
       ];
     }
-
     const getList = await categoryService.getCategoryList(filter, options);
 
     res.status(200).json({
@@ -45,42 +37,6 @@ const getCategoryList = async (req, res) => {
       message: "Get category list successfully!",
       data: getList,
     });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
-/** Get category details by id */
-const getCategoryDetails = async (req, res) => {
-  try {
-    const getDetails = await categoryService.getCategoryById(req.params.categoryId);
-    if (!getDetails) {
-      throw new Error("Category not found!");
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Category details get successfully!",
-      data: getDetails,
-    });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
-
-/** category details update by id */
-const updateDetails = async (req, res) => {
-  try {
-    const categoryId = req.params.categoryId;
-    const categoryExists = await categoryService.getCategoryById(categoryId);
-    if (!categoryExists) {
-      throw new Error("Category not found!");
-    }
-
-    await categoryService.updateDetails(categoryId, req.body);
-
-    res
-      .status(200)
-      .json({ success: true, message: "Category details update successfully!" });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -94,7 +50,6 @@ const deleteCategory = async (req, res) => {
     if (!categoryExists) {
       throw new Error("Category not found!");
     }
-
     await categoryService.deleteCategory(categoryId);
 
     res.status(200).json({
@@ -106,12 +61,28 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+/** Update category */
+const updateCategory = async (req, res) => {
+  try {
+    const reqBody = req.body;
+    const categoryId = req.params.bucategoryId;
+    const categoryExists = await categoryService.getCategoryById(categoryId);
+    if (!categoryExists) {
+      throw new Error("Category not found!");
+    }
+    await categoryService.updateDetails(categoryId,reqBody);
 
-
+    res.status(200).json({
+      success: true,
+      message: "Category update successfully!",
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
 module.exports = {
   createCategory,
   getCategoryList,
-  getCategoryDetails,
-  updateDetails,
   deleteCategory,
+  updateCategory
 };

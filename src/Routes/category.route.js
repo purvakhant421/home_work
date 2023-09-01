@@ -12,32 +12,22 @@ router.post(
   categoryController.createCategory
 );
 
-/** Get category list */
+/** category list */
 router.get(
   "/list",
-  validate(categoryValidation.getCategoryList),
   categoryController.getCategoryList
-);
+)
 
-/** Get category details by id */
-router.get(
-  "/get-details/:categoryId",
-  validate(categoryValidation.getDetails),
-  categoryController.getCategoryDetails
-);
-
-/** category details update by id */
-router.put(
-  "/update-details/:categoryId",
-  validate(categoryValidation.updateDetails),
-  categoryController.updateDetails
-);
-
-/** Delete user */
+/** category delete */
 router.delete(
-  "/delete-category/:categoryId",
-  validate(categoryValidation.getDetails),
+  "/delete/:categoryId",
   categoryController.deleteCategory
-);
+)
+
+/** category update */
+router.put(
+  "/update-category/:categoryId",
+  categoryController.updateCategory
+)
 
 module.exports = router;

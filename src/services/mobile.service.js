@@ -1,71 +1,44 @@
 const { Mobile } = require("../models");
 
-/**
- * Create mobile
- * @param {object} reqBody
- * @returns {Promise<Mobile>}
- */
+//Create Mobile
 const createMobile = async (reqBody) => {
   return Mobile.create(reqBody);
 };
 
-/**
- * Get mobile list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Mobile>}
- */
+// Get Mobile list
 const getMobileList = async (filter, options) => {
-  //const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
-
-  return Mobile.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Mobile.find();
 };
 
-/**
- * Get mobile by email
- * @param {string} email
- * @returns {Promise<Mobile>}
- */
-const getMobileByEmail = async (email) => {
-  return Mobile.findOne({ email });
-};
-
-/**
- * Get mobile details by id
- * @param {ObjectId} mobileId
- * @returns {Promise<Mobile>}
- */
+// Get Mobile details by id
 const getMobileById = async (mobileId) => {
   return Mobile.findById(mobileId);
 };
 
-/**
- * mobile details update by id
- * @param {ObjectId} mobileId
- * @param {object} updateBody
- * @returns {Promise<Mobile>}
- */
-const updateDetails = async (mobileId, updateBody) => {
-  return Mobile.findByIdAndUpdate(mobileId, { $set: updateBody });
-};
-
-
-
-/**
- * Delete mobile
- * @param {ObjectId} mobileId
- * @returns {Promise<Mobile>}
- */
+//  Delete Mobile
 const deleteMobile = async (mobileId) => {
   return Mobile.findByIdAndDelete(mobileId);
 };
 
+// Update Mobile
+const updateMobile = async (mobileId,reqBody) => {
+  return Mobile.findByIdAndUpdate(mobileId,{$set:reqBody});
+};
+
+// Update Mobile status
+const updateMobileStatus = async(mobileId,mobileStatus) =>{
+    if (mobileStatus){
+        return Mobile.findByIdAndUpdate(mobileId,{$set:{is_active:false}});
+    }
+    return Mobile.findByIdAndUpdate(mobileId,{$set:{is_active:true}});
+}
 
 module.exports = {
-  createMobile,
-  getMobileList,
-  getMobileByEmail,
-  getMobileById,
-  updateDetails,
-  deleteMobile,
+    createMobile,
+    getMobileList,
+    getMobileById,
+    deleteMobile,
+    updateMobile,
+    updateMobileStatus
 };

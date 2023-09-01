@@ -1,28 +1,32 @@
 const mongoose = require("mongoose");
-
 const productSchema = new mongoose.Schema(
     {
         product_name : {
             type : String,
-            trim :true
+            trim : true,
         },
-        product_price :{
-            type : Number,
-            trim :true
-        },
-        product_desc : {
+        product_description : {
             type : String,
-            trim :true
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        product_price : {
+            type : Number,
+            default : 0,
+        },
+        category : {
+            type: mongoose.Types.ObjectId,
+            ref: "Category",
+        },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
-const Product = mongoose.model("product", productSchema);
+
+const Product = mongoose.model("Product" , productSchema);
 module.exports = Product;

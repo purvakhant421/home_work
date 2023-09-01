@@ -1,26 +1,24 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const categorySchema = new mongoose.Schema(
     {
         category_name : {
             type : String,
-            trim :true
+            trim : true,
         },
-        category_desc : {
+        category_description : {
             type : String,
-            trim :true
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Category = mongoose.model("category", categorySchema);
+const Category = mongoose.model("Category" , categorySchema);
 module.exports = Category;

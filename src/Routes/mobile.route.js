@@ -5,41 +5,37 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create mobile */
+/** create Mobile */
 router.post(
   "/create-mobile",
   validate(mobileValidation.createMobile),
   mobileController.createMobile
 );
 
-/** Get mobile list */
+/** Get Mobile list */
 router.get(
-  "/list",
-  validate(mobileValidation.getMobileList),
+  "/mobile-list",
   mobileController.getMobileList
 );
 
-/** Get mobile details by id */
-router.get(
-  "/get-details/:mobileId",
-  validate(mobileValidation.getDetails),
-  mobileController.getUserDetails
-);
-
-/** mobile details update by id */
-router.put(
-  "/update-details/:mobileId",
-  validate(mobileValidation.updateDetails),
-  mobileController.updateDetails
-);
-
-/** Delete mobile */
+/** Delete Mobile */
 router.delete(
   "/delete-mobile/:mobileId",
-  validate(mobileValidation.getDetails),
-  mobileController.deleteUser
+  mobileController.deleteMobile
 );
 
+/** Update Mobile */
+router.put(
+  "/update-mobile/:mobileId",
+  validate(mobileValidation.createMobile),
+  mobileController.updateMobile
+);
 
+/** Update Mobile status */
+router.put(
+    "/update-status/:mobileId",
+    validate(mobileValidation.createMobile),
+    mobileController.updateMobileStatus
+);
 
 module.exports = router;

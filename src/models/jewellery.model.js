@@ -1,34 +1,32 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const jewellerySchema = new mongoose.Schema(
     {
-        jewellery_shop_name : {
-            type : String,
-            trim :true
-        },
         jewellery_name : {
             type : String,
-            trim :true
+            trim : true,
         },
-        jewellery_design : {
-            type : String,
-            trim :true
-        },
-        jewellery_quantity : {
+        jewellery_price : {
             type : Number,
-            default :  0
+            default : 0,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        jewellery_material : {
+            type : String,
+            trim : true,
+        },
+        jewellery_description : {
+            type : String,
+            trim : true,
+        },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Jewellery = mongoose.model("jewellery", jewellerySchema);
+const Jewellery = mongoose.model("Jewellery" , jewellerySchema);
 module.exports = Jewellery;

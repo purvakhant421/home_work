@@ -1,70 +1,35 @@
 const { School } = require("../models");
 
-/**
- * Create school
- * @param {object} reqBody
- * @returns {Promise<School>}
- */
+// Create School
 const createSchool = async (reqBody) => {
   return School.create(reqBody);
 };
 
-/**
- * Get school list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<School>}
- */
+// Get School list
 const getSchoolList = async (filter, options) => {
-
-
-  return School.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return School.find();
+  // return School.find({$or:[{standard : 3}]});
 };
 
-/**
- * Get school by email
- * @param {string} email
- * @returns {Promise<School>}
- */
-const getSchoolByEmail = async (email) => {
-  return School.findOne({ email });
+// Get School details by id
+const getSchoolById = async (SchoolId) => {
+  return School.findById(SchoolId);
 };
 
-/**
- * Get school details by id
- * @param {ObjectId} schoolId
- * @returns {Promise<School>}
- */
-const getSchoolById = async (schoolId) => {
-  return School.findById(schoolId);
+// Delete School
+const deleteSchool = async (SchoolId) => {
+  return School.findByIdAndDelete(SchoolId);
 };
 
-/**
- * school details update by id
- * @param {ObjectId} schoolId
- * @param {object} updateBody
- * @returns {Promise<School>}
- */
-const updateDetails = async (schoolId, updateBody) => {
-  return School.findByIdAndUpdate(schoolId, { $set: updateBody });
+// Update School
+const updateSchool = async (SchoolId,reqBody) => {
+  return School.findByIdAndUpdate(SchoolId,{$set:reqBody});
 };
-
-/**
- * Delete school
- * @param {ObjectId} schoolId
- * @returns {Promise<School>}
- */
-const deleteSchool = async (schoolId) => {
-  return School.findByIdAndDelete(schoolId);
-};
-
-
-
 module.exports = {
-  createSchool,
-  getSchoolList,
-  getSchoolByEmail,
-  getSchoolById,
-  updateDetails,
-  deleteSchool,
+    createSchool,
+    getSchoolList,
+    getSchoolById,
+    deleteSchool,
+    updateSchool
 };

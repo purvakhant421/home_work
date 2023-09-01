@@ -11,18 +11,15 @@ router.post(
   validate(userValidation.createUser),
   userController.createUser
 );
-
 /** Get user list */
 router.get(
   "/list",
-  validate(userValidation.getUserList),
   userController.getUserList
 );
 
 /** Get user details by id */
 router.get(
   "/get-details/:userId",
-  validate(userValidation.getDetails),
   userController.getUserDetails
 );
 
@@ -36,10 +33,7 @@ router.put(
 /** Delete user */
 router.delete(
   "/delete-user/:userId",
-  validate(userValidation.getDetails),
   userController.deleteUser
 );
-
-
 
 module.exports = router;

@@ -4,16 +4,17 @@ const { busService } = require("../services");
 const createBus = async (req, res) => {
   try {
     const reqBody = req.body;
-
     const bus = await busService.createBus(reqBody);
-
+    if (!bus) {
+      throw new Error("Something went wrong, please try again or later!");
+    }
     res.status(200).json({
       success: true,
-      message: "bus create successfully!",
-      data: { bus },
+      message: "Bus create successfully!",
+      data: { reqBody },
     });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({ success: false, message:  error.message});
   }
 };
 
@@ -25,11 +26,10 @@ const getBusList = async (req, res) => {
 
     if (search) {
       filter.$or = [
-        { first_name: { $regex: search, $options: "i" } },
-        { last_name: { $regex: search, $options: "i" } },
+        { bus_name: { $regex: search, $options: "i" } },
+        { bus_number : { $regex: search, $options: "i" } },
       ];
     }
-
     const getList = await busService.getBusList(filter, options);
 
     res.status(200).json({
@@ -37,42 +37,6 @@ const getBusList = async (req, res) => {
       message: "Get bus list successfully!",
       data: getList,
     });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
-/** Get bus details by id */
-const getBusDetails = async (req, res) => {
-  try {
-    const getDetails = await busService.getBusById(req.params.busId);
-    if (!getDetails) {
-      throw new Error("Bus not found!");
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Bus details get successfully!",
-      data: getDetails,
-    });
-  } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
-  }
-};
-
-/** bus details update by id */
-const updateDetails = async (req, res) => {
-  try {
-    const busId = req.params.busId;
-    const busExists = await busService.getBusById(busId);
-    if (!busExists) {
-      throw new Error("Bus not found!");
-    }
-
-    await busService.updateDetails(busId, req.body);
-
-    res
-      .status(200)
-      .json({ success: true, message: "Bus details update successfully!" });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -86,7 +50,6 @@ const deleteBus = async (req, res) => {
     if (!busExists) {
       throw new Error("Bus not found!");
     }
-
     await busService.deleteBus(busId);
 
     res.status(200).json({
@@ -98,12 +61,28 @@ const deleteBus = async (req, res) => {
   }
 };
 
+/** Update bus */
+const updateBus = async (req, res) => {
+  try {
+    const reqBody = req.body;
+    const busId = req.params.busId;
+    const busExists = await busService.getBusById(busId);
+    if (!busExists) {
+      throw new Error("Bus not found!");
+    }
+    await busService.updateBus(busId,reqBody);
 
-
+    res.status(200).json({
+      success: true,
+      message: "Bus update successfully!",
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
 module.exports = {
   createBus,
   getBusList,
-  getBusDetails,
-  updateDetails,
   deleteBus,
+  updateBus
 };

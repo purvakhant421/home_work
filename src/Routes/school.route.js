@@ -5,39 +5,28 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create school */
+/** create School */
 router.post(
-  "/create-school",
+  "/create-School",
   validate(schoolValidation.createSchool),
   schoolController.createSchool
 );
-
-/** Get school list */
+/** Get School list */
 router.get(
-  "/list",
-  validate(schoolValidation.getSchoolList),
+  "/School-list",
   schoolController.getSchoolList
 );
 
-/** Get school details by id */
-router.get(
-  "/get-details/:schoolId",
-  validate(schoolValidation.getDetails),
-  schoolController.getSchoolDetails
-);
-
-/**school details update by id */
-router.put(
-  "/update-details/:userId",
-  validate(schoolValidation.updateDetails),
-  schoolController.updateDetails
-);
-
-/** Delete school */
+/** Delete School */
 router.delete(
-  "/delete-school/:schoolId",
-  validate(schoolValidation.getDetails),
+  "/delete-School/:SchoolId",
   schoolController.deleteSchool
 );
 
+/** Update School */
+router.put(
+  "/update-School/:SchoolId",
+  validate(schoolValidation.createSchool),
+  schoolController.updateSchool
+)
 module.exports = router;

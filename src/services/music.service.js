@@ -1,69 +1,36 @@
 const { Music } = require("../models");
 
-/**
- * Create music
- * @param {object} reqBody
- * @returns {Promise<Music>}
- */
+// Create Music
 const createMusic = async (reqBody) => {
   return Music.create(reqBody);
 };
 
-/**
- * Get music list music
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Music>}
- */
+// Get Music list
 const getMusicList = async (filter, options) => {
-
-  return Music.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Music.find();
+  // return Music.find({music_release_year:{$lt:"2010"}});
 };
 
-/**
- * Get music by email
- * @param {string} email
- * @returns {Promise<Music>}
- */
-const getMusicByEmail = async (email) => {
-  return Music.findOne({ email });
+// Get Music details by id
+const getMusicById = async (MusicId) => {
+  return Music.findById(MusicId);
 };
 
-/**
- * Get Music details by id
- * @param {ObjectId} musicId
- * @returns {Promise<Music>}
- */
-const getMusicById = async (musicId) => {
-  return Music.findById(musicId);
+// Delete Music
+const deleteMusic = async (MusicId) => {
+  return Music.findByIdAndDelete(MusicId);
 };
 
-/**
- * music details update by id
- * @param {ObjectId} musicId
- * @param {object} updateBody
- * @returns {Promise<Music>}
- */
-const updateDetails = async (musicId, updateBody) => {
-  return Music.findByIdAndUpdate(musicId, { $set: updateBody });
+// Update Music
+const updateMusic = async (MusicId,reqBody) => {
+  return Music.findByIdAndUpdate(MusicId,{$set:reqBody});
 };
-
-/**
- * Delete music
- * @param {ObjectId} musicId
- * @returns {Promise<Music>}
- */
-const deleteMusic = async (musicId) => {
-  return Music.findByIdAndDelete(musicId);
-};
-
-
 
 module.exports = {
-  createMusic,
-  getMusicList,
-  getMusicByEmail,
-  getMusicById,
-  updateDetails,
-  deleteMusic,
+    createMusic,
+    getMusicList,
+    getMusicById,
+    deleteMusic,
+    updateMusic
 };

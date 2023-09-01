@@ -5,39 +5,28 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create movie */
+/** create Movie */
 router.post(
-  "/create-movie",
+  "/create-Movie",
   validate(movieValidation.createMovie),
   movieController.createMovie
 );
-
-/** Get movie list */
+/** Get Movie list */
 router.get(
-  "/list",
-  validate(movieValidation.getMovieList),
+  "/Movie-list",
   movieController.getMovieList
 );
 
-/** Get movie details by id */
-router.get(
-  "/get-details/:movieId",
-  validate(movieValidation.getDetails),
-  movieController.getMovieDetails
-);
-
-/** movie details update by id */
-router.put(
-  "/update-details/:movieId",
-  validate(movieValidation.updateDetails),
-  movieController.updateDetails
-);
-
-/** Delete movie */
+/** Delete Movie */
 router.delete(
-  "/delete-movie/:movieId",
-  validate(movieValidation.getDetails),
+  "/delete-Movie/:MovieId",
   movieController.deleteMovie
 );
 
+/** Update Movie */
+router.put(
+  "/update-Movie/:MovieId",
+  validate(movieValidation.createMovie),
+  movieController.updateMovie
+)
 module.exports = router;

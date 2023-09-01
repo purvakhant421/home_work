@@ -5,41 +5,28 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create hotel */
+/** create Hotel */
 router.post(
-  "/create-hotel",
+  "/create-Hotel",
   validate(hotelValidation.createHotel),
   hotelController.createHotel
 );
-
-/** Get hotel list */
+/** Get Hotel list */
 router.get(
-  "/list",
-  validate(hotelValidation.getHotelList),
+  "/Hotel-list",
   hotelController.getHotelList
 );
 
-/** Get hotel details by id */
-router.get(
-  "/get-details/:hotelId",
-  validate(hotelValidation.getDetails),
-  hotelController.getHotelDetails
-);
-
-/** user details update by id */
-router.put(
-  "/update-details/:hotelId",
-  validate(hotelValidation.updateDetails),
-  hotelController.updateDetails
-);
-
-/** Delete hotel */
+/** Delete Hotel */
 router.delete(
-  "/delete-hotel/:hotelId",
-  validate(hotelValidation.getDetails),
+  "/delete-Hotel/:HotelId",
   hotelController.deleteHotel
 );
 
-
-
+/** Update Hotel */
+router.put(
+  "/update-Hotel/:HotelId",
+  validate(hotelValidation.createHotel),
+  hotelController.updateHotel
+)
 module.exports = router;

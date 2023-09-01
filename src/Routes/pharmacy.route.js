@@ -5,39 +5,28 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create stationery */
+/** create Pharmacy */
 router.post(
-  "/create-pharmacy",
+  "/create-Pharmacy",
   validate(pharmacyValidation.createPharmacy),
   pharmacyController.createPharmacy
 );
-
-/** Get pharmacy list */
+/** Get Pharmacy list */
 router.get(
-  "/list",
-  validate(pharmacyValidation.getPharmacyList),
+  "/Pharmacy-list",
   pharmacyController.getPharmacyList
 );
 
-/** Get pharmacy details by id */
-router.get(
-  "/get-details/:pharmacyId",
-  validate(pharmacyValidation.getDetails),
-  pharmacyController.getPharmacyDetails
-);
-
-/** pharmacy details update by id */
-router.put(
-  "/update-details/:userId",
-  validate(pharmacyValidation.updateDetails),
-  pharmacyController.updateDetails
-);
-
-/** Delete pharmacy */
+/** Delete Pharmacy */
 router.delete(
-  "/delete-pharmacy/:pharmacyId",
-  validate(pharmacyValidation.getDetails),
+  "/delete-Pharmacy/:PharmacyId",
   pharmacyController.deletePharmacy
 );
 
+/** Update Pharmacy */
+router.put(
+  "/update-Pharmacy/:PharmacyId",
+  validate(pharmacyValidation.createPharmacy),
+  pharmacyController.updatePharmacy
+)
 module.exports = router;

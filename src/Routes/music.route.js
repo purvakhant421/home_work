@@ -5,41 +5,29 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create music */
+/** create Music */
 router.post(
-  "/create-music",
+  "/create-Music",
   validate(musicValidation.createMusic),
   musicController.createMusic
 );
 
-/** Get music list */
+/** Get Music list */
 router.get(
-  "/list",
-  validate(musicValidation.getMusicList),
+  "/Music-list",
   musicController.getMusicList
 );
 
-/** Get music details by id */
-router.get(
-  "/get-details/:musicId",
-  validate(musicValidation.getDetails),
-  musicController.getMusicDetails
-);
-
-/** music details update by id */
-router.put(
-  "/update-details/:musicId",
-  validate(musicValidation.updateDetails),
-  musicController.updateDetails
-);
-
-/** Delete music */
+/** Delete Music */
 router.delete(
-  "/delete-music/:musicId",
-  validate(musicValidation.getDetails),
+  "/delete-Music/:MusicId",
   musicController.deleteMusic
 );
 
-
-
+/** Update Music */
+router.put(
+  "/update-Music/:MusicId",
+  validate(musicValidation.createMusic),
+  musicController.updateMusic
+)
 module.exports = router;

@@ -1,70 +1,36 @@
 const { Pharmacy } = require("../models");
 
-/**
- * Create stationery
- * @param {object} reqBody
- * @returns {Promise<Pharmacy>}
- */
+// Create Pharmacy
 const createPharmacy = async (reqBody) => {
   return Pharmacy.create(reqBody);
 };
 
-/**
- * Get pharmacy list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Pharmacy>}
- */
+// Get Pharmacy list
 const getPharmacyList = async (filter, options) => {
-  //const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
-
-  return Pharmacy.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+   return Pharmacy.find();
+  // return Pharmacy.find({pharmacy_product_price:{$gt:120}});
 };
 
-/**
- * Get pharmacy by email
- * @param {string} email
- * @returns {Promise<Pharmacy>}
- */
-const getPharmacyByEmail = async (email) => {
-  return Pharmacy.findOne({ email });
+// Get Pharmacy details by id
+const getPharmacyById = async (PharmacyId) => {
+  return Pharmacy.findById(PharmacyId);
 };
 
-/**
- * Get pharmacy details by id
- * @param {ObjectId} stationeryId
- * @returns {Promise<Pharmacy>}
- */
-const getPharmacyById = async (pharmacyId) => {
-  return Pharmacy.findById(pharmacyId);
+// Delete Pharmacy
+const deletePharmacy = async (PharmacyId) => {
+  return Pharmacy.findByIdAndDelete(PharmacyId);
 };
 
-/**
- * pharmacy details update by id
- * @param {ObjectId} pharmacyId
- * @param {object} updateBody
- * @returns {Promise<Pharmacy>}
- */
-const updateDetails = async (pharmacyId, updateBody) => {
-  return Pharmacy.findByIdAndUpdate(pharmacyId, { $set: updateBody });
+// update Pharmacy
+const updatePharmacy = async (PharmacyId,reqBody) => {
+  return Pharmacy.findByIdAndUpdate(PharmacyId,{$set:reqBody});
 };
-
-/**
- * Delete pharmacy
- * @param {ObjectId} pharmacyId
- * @returns {Promise<Pharmacy>}
- */
-const deletePharmacy = async (pharmacyId) => {
-  return Pharmacy.findByIdAndDelete(pharmacyId);
-};
-
-
 
 module.exports = {
-  createPharmacy,
-  getPharmacyList,
-  getPharmacyByEmail,
-  getPharmacyById,
-  updateDetails,
-  deletePharmacy,
+    createPharmacy,
+    getPharmacyList,
+    getPharmacyById,
+    deletePharmacy,
+    updatePharmacy
 };

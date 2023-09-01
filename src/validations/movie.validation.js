@@ -1,56 +1,16 @@
 const Joi = require("joi");
 
-/** create movie */
+/** create Movie */
 const createMovie = {
   body: Joi.object().keys({
-    movie_name: Joi.string().required().trim(),
+    movie_title: Joi.string().required().trim(),
     movie_director: Joi.string().required().trim(),
-    movie_rating: Joi.number().integer().required(),
-    movie_comment: Joi.string().required().trim(),
-  }),
-};
-
-/** GEt movie list */
-const getMovieList = {
-  query: Joi.object().keys({
-    search: Joi.string().trim().allow(""),
-    sortBy: Joi.string().trim().allow(""),
-    limit: Joi.number().integer().allow(""),
-    page: Joi.number().integer().allow(""),
-  }),
-};
-
-/** Get movie details by id */
-const getDetails = {
-  params: Joi.object().keys({
-    movieId: Joi.string().required().trim(),
-  }),
-};
-
-/** movie details update by id */
-const updateDetails = {
-  params: Joi.object().keys({
-    movieId: Joi.string().required().trim(),
-  }),
-  body: Joi.object().keys({
-    movie_name: Joi.string().trim(),
-    movie_director: Joi.string().trim(),
-  }),
-};
-
-/** Send mail */
-const sendMail = {
-  body: Joi.object({
-    email: Joi.string().required().trim().email(),
-    subject: Joi.string().required().trim(),
-    text: Joi.string().required().trim(),
+    movie_cast: Joi.string().required().trim(),
+    movie_release_date: Joi.string().required().trim(),
+    movie_duration_time: Joi.string().required().trim(),
   }),
 };
 
 module.exports = {
-  createMovie,
-  getMovieList,
-  getDetails,
-  updateDetails,
-  sendMail,
-};
+    createMovie
+}

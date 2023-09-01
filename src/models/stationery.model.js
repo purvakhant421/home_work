@@ -1,34 +1,32 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
-const stationerySchema = new mongoose.Schema(
+const stationarySchema = new mongoose.Schema(
     {
-        stationery_name : {
+        stationary_name : {
             type : String,
-            trim :true
+            trim : true,
         },
-        stationery_address : {
+        stationary_item : {
             type : String,
-            trim :true
+            trim : true,
         },
-        stationery_items_name : {
-            type : String,
-            trim :true
-        },
-        stationery_items_price : {
+        stationary_item_price : {
             type : Number,
-            default : 0
+            default : 0,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        stationary_address : {
+            type : String,
+            trim : true,
+        },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Stationery = mongoose.model("stationery", stationerySchema);
-module.exports = Stationery;
+const Stationary = mongoose.model("Stationary" , stationarySchema);
+module.exports = Stationary;

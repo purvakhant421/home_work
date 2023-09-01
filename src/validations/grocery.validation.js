@@ -1,57 +1,15 @@
 const Joi = require("joi");
 
-/** create grocery */
+/** create Grocery */
 const createGrocery = {
   body: Joi.object().keys({
-    grocery_store_name: Joi.string().required().trim(),
     grocery_name: Joi.string().required().trim(),
-    grocery_price: Joi.number().integer().required(),
-    grocery_quantity: Joi.number().integer().required(),
-  }),
-};
-
-/** GEt grocery list */
-const getGroceryList = {
-  query: Joi.object().keys({
-    search: Joi.string().trim().allow(""),
-    sortBy: Joi.string().trim().allow(""),
-    limit: Joi.number().integer().allow(""),
-    page: Joi.number().integer().allow(""),
-  }),
-};
-
-/** Get grocery details by id */
-const getDetails = {
-  params: Joi.object().keys({
-    groceryId: Joi.string().required().trim(),
-  }),
-};
-
-/** grocery details update by id */
-const updateDetails = {
-  params: Joi.object().keys({
-    groceryId: Joi.string().required().trim(),
-  }),
-  body: Joi.object().keys({
-    grocery_store_name: Joi.string().trim(),
-    grocery_name: Joi.string().trim(),
-  }),
-};
-
-
-/** Send mail */
-const sendMail = {
-  body: Joi.object({
-    email: Joi.string().required().trim().email(),
-    subject: Joi.string().required().trim(),
-    text: Joi.string().required().trim(),
+    grocery_product: Joi.string().required().trim(),
+    grocery_product_price: Joi.number().integer().required(),
+    grocery_description: Joi.string().required().trim(),
   }),
 };
 
 module.exports = {
-  createGrocery,
-  getGroceryList,
-  getDetails,
-  updateDetails,
-  sendMail,
-};
+    createGrocery
+}

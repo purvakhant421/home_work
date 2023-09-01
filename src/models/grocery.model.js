@@ -1,34 +1,32 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-
 const grocerySchema = new mongoose.Schema(
     {
-        grocery_store_name : {
-            type : String,
-            trim :true
-        },
         grocery_name : {
             type : String,
-            trim :true
+            trim : true,
         },
-        grocery_price : {
+        grocery_product : {
+            type : String,
+            trim : true,
+        },
+        grocery_product_price : {
             type : Number,
-            default : 0
+            default : 0,
         },
-        grocery_quantity : {
-            type : Number,
-            default : 0
+        grocery_description : {
+            type : String,
+            trim : true,
         },
-        is_active: {
-            type: Boolean,
-            default: true,
-          },
+        is_active : {
+            type : Boolean,
+            default : true,
+        },
     },
     {
         timestamps: true,
-        versionKey: false,
-      }
+        versionkey: false,
+    }
 );
 
-const Grocery = mongoose.model("grocery", grocerySchema);
+const Grocery = mongoose.model("Grocery" , grocerySchema);
 module.exports = Grocery;

@@ -1,70 +1,35 @@
 const { Movie } = require("../models");
 
-/**
- * Create movie
- * @param {object} reqBody
- * @returns {Promise<Movie>}
- */
+// Create Movie
 const createMovie = async (reqBody) => {
   return Movie.create(reqBody);
 };
 
-/**
- * Get movie list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Movie>}
- */
+// Get Movie list
 const getMovieList = async (filter, options) => {
-
-
-  return Movie.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Movie.find();
+  // return Movie.find({$or:[{movie_director:"James Cameron"},{movie_title:"Pulp Fiction"}]});
 };
 
-/**
- * Get movie by email
- * @param {string} email
- * @returns {Promise<Movie>}
- */
-const getMovieByEmail = async (email) => {
-  return Movie.findOne({ email });
+// Get Movie details by id
+const getMovieById = async (MovieId) => {
+  return Movie.findById(MovieId);
 };
 
-/**
- * Get movie details by id
- * @param {ObjectId} movieId
- * @returns {Promise<Movie>}
- */
-const getMovieById = async (movieId) => {
-  return Movie.findById(movieId);
+// Delete Movie
+const deleteMovie = async (MovieId) => {
+  return Movie.findByIdAndDelete(MovieId);
 };
 
-/**
- * movie details update by id
- * @param {ObjectId} movieId
- * @param {object} updateBody
- * @returns {Promise<Movie>}
- */
-const updateDetails = async (movieId, updateBody) => {
-  return Movie.findByIdAndUpdate(movieId, { $set: updateBody });
+// Update Movie
+const updateMovie = async (MovieId,reqBody) => {
+  return Movie.findByIdAndUpdate(MovieId,{$set:reqBody});
 };
-
-/**
- * Delete movie
- * @param {ObjectId} movieId
- * @returns {Promise<Movie>}
- */
-const deleteMovie = async (movieId) => {
-  return Movie.findByIdAndDelete(movieId);
-};
-
-
-
 module.exports = {
-  createMovie,
-  getMovieList,
-  getMovieByEmail,
-  getMovieById,
-  updateDetails,
-  deleteMovie,
+    createMovie,
+    getMovieList,
+    getMovieById,
+    deleteMovie,
+    updateMovie
 };

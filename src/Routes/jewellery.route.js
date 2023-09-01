@@ -5,41 +5,29 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create jewellery */
+/** create Jewellery */
 router.post(
-  "/create-jewellery",
+  "/create-Jewellery",
   validate(jewelleryValidation.createJewellery),
   jewelleryController.createJewellery
 );
-
-/** Get jewellery list */
+/** Get Jewellery list */
 router.get(
-  "/list",
-  validate(jewelleryValidation.getJewelleryList),
+  "/Jewellery-list",
   jewelleryController.getJewelleryList
 );
 
-/** Get jewellery details by id */
-router.get(
-  "/get-details/:jewelleryId",
-  validate(jewelleryValidation.getDetails),
-  jewelleryController.getJewelleryDetails
-);
-
-/** user details update by id */
-router.put(
-  "/update-details/:jewelleryId",
-  validate(jewelleryValidation.updateDetails),
-  jewelleryController.updateDetails
-);
-
-/** Delete jewellery */
+/** Delete Jewellery */
 router.delete(
-  "/delete-jewellery/:jewelleryId",
-  validate(jewelleryValidation.getDetails),
+  "/delete-Jewellery/:JewelleryId",
   jewelleryController.deleteJewellery
 );
 
-
+/** Update jewellery */
+router.put(
+  "/update-jewellery/:jewelleryId",
+  validate(jewelleryValidation.createJewellery),
+  jewelleryController.updateJewellery
+)
 
 module.exports = router;

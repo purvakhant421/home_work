@@ -5,39 +5,29 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create grocery */
+/** create Grocery */
 router.post(
-  "/create-grocery",
+  "/create-Grocery",
   validate(groceryValidation.createGrocery),
   groceryController.createGrocery
 );
-
-/** Get grocery list */
+/** Get Grocery list */
 router.get(
-  "/list",
-  validate(groceryValidation.getGroceryList),
+  "/Grocery-list",
   groceryController.getGroceryList
 );
 
-/** Get grocery details by id */
-router.get(
-  "/get-details/:groceryId",
-  validate(groceryValidation.getDetails),
-  groceryController.getGroceryDetails
-);
-
-/** grocery details update by id */
-router.put(
-  "/update-details/:userId",
-  validate(groceryValidation.updateDetails),
-  groceryController.updateDetails
-);
-
-/** Delete grocery */
+/** Delete Grocery */
 router.delete(
-  "/delete-grocery/:groceryId",
-  validate(groceryValidation.getDetails),
+  "/delete-Grocery/:GroceryId",
   groceryController.deleteGrocery
+);
+
+/** Update Grocery */
+router.put(
+  "/update-Grocery/:GroceryId",
+  validate(groceryValidation.createGrocery),
+  groceryController.updateGrocery
 );
 
 module.exports = router;

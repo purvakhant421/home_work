@@ -5,39 +5,28 @@ const validate = require("../middlewares/validate");
 
 const router = express.Router();
 
-/** create travel */
+/** create Travel */
 router.post(
-  "/create-travel",
+  "/create-Travel",
   validate(travelValidation.createTravel),
   travelController.createTravel
 );
-
-/** Get travel list */
+/** Get Travel list */
 router.get(
-  "/list",
-  validate(travelValidation.getTravelList),
+  "/Travel-list",
   travelController.getTravelList
 );
 
-/** Get travel details by id */
-router.get(
-  "/get-details/:travelId",
-  validate(travelValidation.getDetails),
-  travelController.getTravelDetails
-);
-
-/** travel details update by id */
-router.put(
-  "/update-details/:travelId",
-  validate(travelValidation.updateDetails),
-  travelController.updateDetails
-);
-
-/** Delete travel */
+/** Delete Travel */
 router.delete(
-  "/delete-travel/:travelId",
-  validate(travelValidation.getDetails),
+  "/delete-Travel/:TravelId",
   travelController.deleteTravel
 );
 
+/** Update Travel */
+router.put(
+  "/update-Travel/:TravelId",
+  validate(travelValidation.createTravel),
+  travelController.updateTravel
+)
 module.exports = router;

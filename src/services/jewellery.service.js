@@ -1,69 +1,35 @@
 const { Jewellery } = require("../models");
 
-/**
- * Create Jewellery
- * @param {object} reqBody
- * @returns {Promise<Jewellery>}
- */
+// Create Jewellery
 const createJewellery = async (reqBody) => {
   return Jewellery.create(reqBody);
 };
 
-/**
- * Get Jewellery list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Jewellery>}
- */
+// Get Jewellery list
 const getJewelleryList = async (filter, options) => {
-
-  return Jewellery.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Jewellery.find();
+  // return Jewellery.find({$and:[{jewellery_name:["Ring"]}]});
 };
 
-/**
- * Get Jewellery by email
- * @param {string} email
- * @returns {Promise<Jewellery>}
- */
-const getJewelleryByEmail = async (email) => {
-  return Jewellery.findOne({ email });
+// Get Jewellery details by id
+const getJewelleryById = async (JewelleryId) => {
+  return Jewellery.findById(JewelleryId);
 };
 
-/**
- * Get Jewellery details by id
- * @param {ObjectId} jewelleryId
- * @returns {Promise<Jewellery>}
- */
-const getJewelleryById = async (jewelleryId) => {
-  return Jewellery.findById(jewelleryId);
+// Delete Jewellery
+const deleteJewellery = async (JewelleryId) => {
+  return Jewellery.findByIdAndDelete(JewelleryId);
 };
 
-/**
- * jewllery details update by id
- * @param {ObjectId} jewlleryId
- * @param {object} updateBody
- * @returns {Promise<Jewellery>}
- */
-const updateDetails = async (jewlleryId, updateBody) => {
-  return Jewellery.findByIdAndUpdate(jewelleryId, { $set: updateBody });
+// Update Jewellery
+const updateJewellery = async (JewelleryId,reqBody) => {
+  return Jewellery.findByIdAndUpdate(JewelleryId,{$set:reqBody});
 };
-
-
-/**
- * Delete Jewellery
- * @param {ObjectId} jewelleryId
- * @returns {Promise<Jewellery>}
- */
-const deleteJewellery = async (jewelleryId) => {
-  return Jewellery.findByIdAndDelete(jewelleryId);
-};
-
-
 module.exports = {
-  createJewellery,
-  getJewelleryList,
-  getJewelleryByEmail,
-  getJewelleryById,
-  updateDetails,
-  deleteJewellery,
+    createJewellery,
+    getJewelleryList,
+    getJewelleryById,
+    deleteJewellery,
+    updateJewellery
 };

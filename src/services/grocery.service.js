@@ -1,69 +1,37 @@
 const { Grocery } = require("../models");
 
-/**
- * Create Grocery
- * @param {object} reqBody
- * @returns {Promise<Grocery>}
- */
+// Create Grocery
 const createGrocery = async (reqBody) => {
   return Grocery.create(reqBody);
 };
 
-/**
- * Get grocery list
- * @param {object} filter
- * @param {object} options
- * @returns {Promise<Grocery>}
- */
+// Get Grocery list
 const getGroceryList = async (filter, options) => {
-
-  return Grocery.find({$or:[{is_active:true}]})
+//   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+  return Grocery.find();
+  // return Grocery.find({$or:[{grocery_product:"Apple"},{grocery_name:"CVC"}]});
 };
 
-/**
- * Get grocery by email
- * @param {string} email
- * @returns {Promise<Grocery>}
- */
-const getGroceryByEmail = async (email) => {
-  return Grocery.findOne({ email });
+// Get Grocery details by id
+const getGroceryById = async (GroceryId) => {
+  return Grocery.findById(GroceryId);
 };
 
-/**
- * Get grocery details by id
- * @param {ObjectId} groceryId
- * @returns {Promise<Grocery>}
- */
-const getGroceryById = async (groceryId) => {
-  return Grocery.findById(groceryId);
+// Delete Grocery
+const deleteGrocery = async (GroceryId) => {
+  return Grocery.findByIdAndDelete(GroceryId);
 };
 
-/**
- * grocery details update by id
- * @param {ObjectId} groceryId
- * @param {object} updateBody
- * @returns {Promise<Grocery>}
- */
-const updateDetails = async (groceryId, updateBody) => {
-  return Grocery.findByIdAndUpdate(groceryId, { $set: updateBody });
+// Update Grocery
+const updateGrocery = async (GroceryId,reqBody) => {
+  return Grocery.findByIdAndUpdate(GroceryId,{$set:reqBody});
 };
-
-/**
- * Delete grocery
- * @param {ObjectId} groceryId
- * @returns {Promise<Grocery>}
- */
-const deleteGrocery = async (groceryId) => {
-  return Grocery.findByIdAndDelete(groceryId);
-};
-
-
 
 module.exports = {
-  createGrocery,
-  getGroceryList,
-  getGroceryByEmail,
-  getGroceryById,
-  updateDetails,
-  deleteGrocery,
+    createGrocery,
+    getGroceryList,
+    getGroceryById,
+    deleteGrocery,
+    updateGrocery
+
 };
